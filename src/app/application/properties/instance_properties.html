@@ -47,16 +47,18 @@
                 | displayUnspecifiedProperties:displayUnspecified
                 | displayProperties:displayDeletedProperties
                 | orderBy:'name':order"
-                 class="repeated-item height-20px " flex >
+                 class="repeated-item height-20px " flex>
                 <!-- Non Global Properties -->
                 <div layout="row"
                      ng_if="!key_value_property.inGlobal"
                      class="margin-1pc">
                     <div layout="column" flex="50">
                         <div class="truncate-ellipsis">
-                            <label id="instance-properties_key-property-label-{{key_value_property.name}}" class="property-label"
+                            <label id="instance-properties_key-property-label-{{key_value_property.name}}"
+                                   class="property-label"
                                    ng-class="{'text-stroke':!key_value_property.inModel, 'default-value-color': key_value_property.defaultValue && !key_value_property.value}"
-                            >{{key_value_property.name}}</label><span ng-show="key_value_property.required"class="property-required">*</span>
+                            >{{key_value_property.name}}</label><span ng-show="key_value_property.required"
+                                                                      class="property-required">*</span>
                             <md-tooltip md-direction="top">
                                 {{key_value_property.name}}
                             </md-tooltip>

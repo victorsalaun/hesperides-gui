@@ -40,13 +40,15 @@
     <div layout="row" flex="auto">
         <md-input-container class="md-block" flex="36">
             <label>{{ 'properties.filter.byKey' | translate }}</label>
-            <input id="properties-global_key-filter-input" type="text" ng-trim="true" ng-model="globalPropertiesKeyFilter"
+            <input id="properties-global_key-filter-input" type="text" ng-trim="true"
+                   ng-model="globalPropertiesKeyFilter"
                    aria-label="{{ 'properties.filter.byKey' | translate }}"/>
         </md-input-container>
 
         <md-input-container class="md-block" flex="60">
             <label>{{ 'properties.filter.byValue' | translate }}</label>
-            <input id="properties-global_value-filter-input" type="text" ng-trim="true" ng-model="globalPropertiesValueFilter"
+            <input id="properties-global_value-filter-input" type="text" ng-trim="true"
+                   ng-model="globalPropertiesValueFilter"
                    aria-label="{{ 'properties.filter.byValue' | translate }}"/>
         </md-input-container>
     </div>
@@ -54,14 +56,16 @@
     <md-content class="properties-container">
         <!-- Warning ! We need md-virtual-repeat to have reactive UI -->
         <md-virtual-repeat-container id="vertical-container" class="height-300px">
-            <div md-virtual-repeat="key_value_property in platform.global_properties.key_value_properties | filterProperties:{'name':globalPropertiesKeyFilter, 'filtrable_value':globalPropertiesValueFilter} | orderBy:'name':sortOrder"
-                 class="repeated-item margin-1pc" flex layout="row">
+            <div
+                md-virtual-repeat="key_value_property in platform.global_properties.key_value_properties | filterProperties:{'name':globalPropertiesKeyFilter, 'filtrable_value':globalPropertiesValueFilter} | orderBy:'name':sortOrder"
+                class="repeated-item margin-1pc" flex layout="row">
                 <div layout="column">
                     <div layout="row" flex="auto">
                         <div flex="40">
                             <div layout="row" flex="auto">
                                 <div flex="5">
-                                    <span id="properties-globales_trash-{{key_value_property.name}}" class="fa fa-trash delete-property-icon"
+                                    <span id="properties-globales_trash-{{key_value_property.name}}"
+                                          class="fa fa-trash delete-property-icon"
                                           aria-label="Supprimer"
                                           ng-click="platform.global_properties.deleteKeyValue(key_value_property); hover = false;"
                                           ng-mouseenter="hover = true"
@@ -70,7 +74,8 @@
                                 </div>
                                 <div flex="5" ng-init="zoomInGlobalProperties = false">
                                     <div layout="column" layout-wrap>
-                                        <span id="properties-globales_zoom-{{key_value_property.name}}" flex class="ng-scope zoom-in-property-icon"
+                                        <span id="properties-globales_zoom-{{key_value_property.name}}" flex
+                                              class="ng-scope zoom-in-property-icon"
                                               ng-class="zoomInGlobalProperties ? 'fa fa-compress' : 'fa fa-expand'"
                                               ng-click="zoomInGlobalProperties = !zoomInGlobalProperties"
                                               ng-show="(platform.global_properties_usage[key_value_property.name] | filter : {inModel:'true'}).length">
@@ -78,12 +83,14 @@
                                     </div>
                                 </div>
                                 <div flex="30">
-                                    <span ng-show="zoomInGlobalProperties" ng-bind="'properties.platform.globalProperties.used_in' | translate"></span>
+                                    <span ng-show="zoomInGlobalProperties"
+                                          ng-bind="'properties.platform.globalProperties.used_in' | translate"></span>
                                 </div>
                                 <div flex="60">
                                     <div class="truncate-ellipsis">
-                                        <label id="properties-globales_key-property-label-{{key_value_property.name}}" class="property-label"
-                                               ng-class="{'text-stroke': hover}" >{{key_value_property.name}}</label>
+                                        <label id="properties-globales_key-property-label-{{key_value_property.name}}"
+                                               class="property-label"
+                                               ng-class="{'text-stroke': hover}">{{key_value_property.name}}</label>
                                         <md-tooltip md-direction="top">
                                             {{key_value_property.name}}
                                         </md-tooltip>
@@ -94,19 +101,24 @@
                         </div>
 
                         <div flex="60">
-                                <input id="properties-globales_value-property-input-{{key_value_property.name}}" ng-model="key_value_property.value"
-                                       ng-trim="true"
-                                       ng-focus="focusthis = true"
-                                       ng-blur="focusthis = false"
-                                       ng-class="{'text-stroke': hover}"
-                                       class="property-value">
+                            <input id="properties-globales_value-property-input-{{key_value_property.name}}"
+                                   ng-model="key_value_property.value"
+                                   ng-trim="true"
+                                   ng-focus="focusthis = true"
+                                   ng-blur="focusthis = false"
+                                   ng-class="{'text-stroke': hover}"
+                                   class="property-value">
                         </div>
                     </div>
-                    <div ng-show="zoomInGlobalProperties && (platform.global_properties_usage[key_value_property.name] | filter : {inModel:'true'}).length">
-                        <md-list flex="auto"class="global-property-usage">
-                            <md-list-item ng-repeat="usage in (platform.global_properties_usage[key_value_property.name] | filter : {inModel:'true'}) track by $index">
+                    <div
+                        ng-show="zoomInGlobalProperties && (platform.global_properties_usage[key_value_property.name] | filter : {inModel:'true'}).length">
+                        <md-list flex="auto" class="global-property-usage">
+                            <md-list-item
+                                ng-repeat="usage in (platform.global_properties_usage[key_value_property.name] | filter : {inModel:'true'}) track by $index">
                                 <div class="truncate-ellipsis">
-                                    <label id="properties-globales_platform-prettyfy-path-label-{{key_value_property.name}}" class="global-property-usage-label">{{platform.prettify_path(usage.path)}}</label>
+                                    <label
+                                        id="properties-globales_platform-prettyfy-path-label-{{key_value_property.name}}"
+                                        class="global-property-usage-label">{{platform.prettify_path(usage.path)}}</label>
                                 </div>
                             </md-list-item>
                         </md-list>

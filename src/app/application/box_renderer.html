@@ -21,14 +21,16 @@
 
 <div layout="row">
     <div class="text-left" flex="50">
-        <a href="" id="box-renderer_edit-logic-group-{{box.name}}" editable-text="box.name" class="{{contain_empty_module(box)}}"
+        <a href="" id="box-renderer_edit-logic-group-{{box.name}}" editable-text="box.name"
+           class="{{contain_empty_module(box)}}"
            onbeforesave="update_box_name(box, box.name, $data)">
-           {{box.name}}
-           <md-tooltip>{{ 'properties.logicGroup.update' | translate }}</md-tooltip>
+            {{box.name}}
+            <md-tooltip>{{ 'properties.logicGroup.update' | translate }}</md-tooltip>
         </a>
     </div>
     <div flex="50" layout="row" layout-align="end start">
-        <md-button id="box-renderer_add-module-button-{{box.name}}" ng-click="search_module(box)" aria-label="{{ 'properties.module.add' | translate }}" class="md-xs">
+        <md-button id="box-renderer_add-module-button-{{box.name}}" ng-click="search_module(box)"
+                   aria-label="{{ 'properties.module.add' | translate }}" class="md-xs">
             <md-tooltip>{{ 'properties.module.add' | translate }}</md-tooltip>
             <i class="fa fa-plus"></i>
         </md-button>
@@ -37,7 +39,8 @@
             <md-tooltip>{{ 'properties.logicGroup.add' | translate }}</md-tooltip>
             <i class="fa fa-inbox"></i>
         </md-button>
-        <md-button id="box-renderer_delete-module-button-{{box.name}}" ng-really-message="{{ 'properties.logicGroup.delete' | translate : {name:box.name} }}"
+        <md-button id="box-renderer_delete-module-button-{{box.name}}"
+                   ng-really-message="{{ 'properties.logicGroup.delete' | translate : {name:box.name} }}"
                    aria-label="{{ 'properties.logicGroup.delete' | translate }}"
                    ng-really-click="remove_box(box.name, box)" ng-if="box.isEmpty()"
                    class="md-warn md-xs">
@@ -50,10 +53,14 @@
     <li class="jumbotron" ng-repeat="box in (box.children | orderObjectBy:'name')"
         ng-include="'application/box_renderer.html'"></li>
 
-    <li ng-if="box.modules.length > 0" class="jumbotron instance" ng-repeat="module in box.modules | orderObjectBy:'name'">
+    <li ng-if="box.modules.length > 0" class="jumbotron instance"
+        ng-repeat="module in box.modules | orderObjectBy:'name'">
         <div layout="row">
-            <div class="property-box-module-name layout-align-start-center layout-row flex-none" layout="row" layout-align="start center" flex="none">
-                <a id="box-renderer_editmodule-button-{{module.title.split(',')[0]}}" href="" class="module-link has_model_{{is_module_has_model(module)}}" ng-click="edit_properties(platform, module)">
+            <div class="property-box-module-name layout-align-start-center layout-row flex-none" layout="row"
+                 layout-align="start center" flex="none">
+                <a id="box-renderer_editmodule-button-{{module.title.split(',')[0]}}" href=""
+                   class="module-link has_model_{{is_module_has_model(module)}}"
+                   ng-click="edit_properties(platform, module)">
                     {{module.title}}
                     <md-tooltip>{{ 'properties.module.editProperties.tooltip' | translate }}</md-tooltip>
                 </a>
@@ -61,17 +68,21 @@
 
             <span ng-switch="module.instances.length" data-ng-init="module.isInstanceOpen=isInstanceOpen">
                 <span ng-switch-when="0">
-                    <md-button id="md-button_hide-all-instance-{{module.name}}" ng-click="preview_instance(box, application, platform, instance, module, true)" class="md-xs">
+                    <md-button id="md-button_hide-all-instance-{{module.name}}"
+                               ng-click="preview_instance(box, application, platform, instance, module, true)"
+                               class="md-xs">
                         <span class="fa fa-eye"></span>
                         <md-tooltip>{{ 'properties.module.instance.preview' | translate }}</md-tooltip>
                     </md-button>
                 </span>
                 <span ng-switch-default>
-                    <md-button id="md-button_hide-all-instance-{{module.name}}" ng-click="module.isInstanceOpen = 0" ng-show="module.isInstanceOpen === 1" class="md-xs">
+                    <md-button id="md-button_hide-all-instance-{{module.name}}" ng-click="module.isInstanceOpen = 0"
+                               ng-show="module.isInstanceOpen === 1" class="md-xs">
                         <span class="fa fa-compress"></span>
                         <md-tooltip>{{ 'properties.instance.hide.all' | translate }}</md-tooltip>
                     </md-button>
-                    <md-button id="md-button_show-all-instance-{{module.name}}" ng-click="module.isInstanceOpen = 1" ng-show="module.isInstanceOpen === 0" class="md-xs">
+                    <md-button id="md-button_show-all-instance-{{module.name}}" ng-click="module.isInstanceOpen = 1"
+                               ng-show="module.isInstanceOpen === 0" class="md-xs">
                         <span class="fa fa-expand"></span>
                         <md-tooltip>{{ 'properties.instance.show.all' | translate }}</md-tooltip>
                     </md-button>
@@ -84,10 +95,11 @@
         </div>
 
         <div id="div_instance-list-{{module.name}}" ng-if="module.isInstanceOpen" layout="row" layout-wrap>
-            <div id="div_instance-{{module.name}}-{{instance.name}}" ng-repeat="instance in module.instances | orderObjectBy:'name'"
-                ng-mouseover="instance.hover = true"
-                ng-mouseleave="instance.hover = false"
-                class="property-instance" flex="nogrow">
+            <div id="div_instance-{{module.name}}-{{instance.name}}"
+                 ng-repeat="instance in module.instances | orderObjectBy:'name'"
+                 ng-mouseover="instance.hover = true"
+                 ng-mouseleave="instance.hover = false"
+                 class="property-instance" flex="nogrow">
                 <md-button class="md-raised" ng-click="edit_instance(instance, module.properties_path)"
                            aria-label="{{ 'properties.module.instance.editProperties.tooltip' | translate }}">
                     <md-tooltip>{{ 'properties.module.instance.editProperties.tooltip' | translate }}</md-tooltip>
@@ -98,11 +110,12 @@
                     <md-tooltip>{{ 'properties.module.instance.preview' | translate }}</md-tooltip>
                     <i class="fa fa-eye"></i>
                 </md-button>
-                <md-button ng-really-message="{{ 'properties.module.instance.delete.message' | translate :{name:instance.name} }}"
-                           aria-label="{{ 'properties.module.instance.delete' | translate }}"
-                           ng-really-click="delete_instance(instance, module)"
-                           class="md-warn md-xs"
-                           ng-class="{'instance-delete-button-hide': !instance.hover}">
+                <md-button
+                    ng-really-message="{{ 'properties.module.instance.delete.message' | translate :{name:instance.name} }}"
+                    aria-label="{{ 'properties.module.instance.delete' | translate }}"
+                    ng-really-click="delete_instance(instance, module)"
+                    class="md-warn md-xs"
+                    ng-class="{'instance-delete-button-hide': !instance.hover}">
                     <md-tooltip>{{ 'properties.module.instance.delete' | translate }}</md-tooltip>
                     <i class="fa fa-trash"></i>
                 </md-button>
