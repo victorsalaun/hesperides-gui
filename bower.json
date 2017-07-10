@@ -33,11 +33,11 @@
     "jszip": "Stuk/jszip#2.5.0",
     "lodash": "4.17.4",
     "momentjs": "2.10.6",
+    "notifyjs": "0.4.2",
     "sc-date-time": "1.1.6",
     "store.js": "storejs#1.0.13",
     "underscore": "1.6.0",
-    "x2js": "1.1.7",
-    "notifyjs": "^0.4.2"
+    "x2js": "1.1.7"
   },
   "resolutions": {
     "angular": "1.4.10",
