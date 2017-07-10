@@ -31,39 +31,46 @@
                         <md-input-container md-no-float class="md-block" flex="50">
                             <label><strong>{{ 'techno.modal.name' | translate }}</strong></label>
                             <input type="text" required ng-trim="true" ng-model="new_techno.name" md-autofocus="true"
-                                   id="technoName" placeholder="{{ 'techno.modal.name.placeholder' | translate }}" />
+                                   id="technoName" placeholder="{{ 'techno.modal.name.placeholder' | translate }}"/>
                         </md-input-container>
                         <md-input-container md-no-float class="md-block" flex="50">
                             <label><strong>{{ 'techno.modal.version' | translate }}</strong></label>
                             <input type="text" required ng-trim="true" ng-model="new_techno.version"
-                                   id="technoVersion" placeholder="{{ 'techno.modal.version.placeholder' | translate }}"/>
+                                   id="technoVersion"
+                                   placeholder="{{ 'techno.modal.version.placeholder' | translate }}"/>
                         </md-input-container>
                     </div>
                     <!--<md-input-container class="md-block">-->
-                        <label><strong>{{ 'modalFrom.origin' | translate }}</strong></label>
-                        <md-autocomplete
-                                required
-                                id="techno-menu-modal-from_techno-autocomplete"
-                                ng-model="technoSearched"
-                                md-no-cache="true"
-                                md-selected-item="ctrl.selectedItem"
-                                md-search-text="ctrl.searchText"
-                                md-items="techno in find_technos_by_name(ctrl.searchText)"
-                                md-item-text="techno.title"
-                                md-selected-item-change="(techno) ? technoSearched = techno : false"
-                                md-min-length="0"
-                                md-autoselect="true"
-                                placeholder="{{ 'techno.modalFrom.origin.placeholder' | translate }}">
-                            <span md-highlight-text="ctrl.searchText">{{techno.name}} {{techno.version}}</span>
-                        </md-autocomplete>
+                    <label><strong>{{ 'modalFrom.origin' | translate }}</strong></label>
+                    <md-autocomplete
+                        required
+                        id="techno-menu-modal-from_techno-autocomplete"
+                        ng-model="technoSearched"
+                        md-no-cache="true"
+                        md-selected-item="ctrl.selectedItem"
+                        md-search-text="ctrl.searchText"
+                        md-items="techno in find_technos_by_name(ctrl.searchText)"
+                        md-item-text="techno.title"
+                        md-selected-item-change="(techno) ? technoSearched = techno : false"
+                        md-min-length="0"
+                        md-autoselect="true"
+                        placeholder="{{ 'techno.modalFrom.origin.placeholder' | translate }}">
+                        <span md-highlight-text="ctrl.searchText">{{techno.name}} {{techno.version}}</span>
+                    </md-autocomplete>
                     <!--</md-input-container>-->
                     <input type="submit" id="submit" value="Submit" ng-hide="true"/>
                 </form>
             </md-content>
         </div>
         <md-dialog-actions>
-            <md-button id="techno-menu-modal-from_create-button" ng-click="create_techno_from(new_techno.name, new_techno.version, technoSearched.name, technoSearched.version, technoSearched.is_working_copy)" class="md-raised md-primary" ng-disabled="technoForm.$invalid">{{ 'button.modal.create' | translate }}</md-button>
-            <md-button id="techno-menu-modal-from_create-button" ng-click="closeDialog()" class="md-raised md-warn">{{ 'button.modal.cancel' | translate }}</md-button>
+            <md-button id="techno-menu-modal-from_create-button"
+                       ng-click="create_techno_from(new_techno.name, new_techno.version, technoSearched.name, technoSearched.version, technoSearched.is_working_copy)"
+                       class="md-raised md-primary" ng-disabled="technoForm.$invalid">{{ 'button.modal.create' |
+                translate }}
+            </md-button>
+            <md-button id="techno-menu-modal-from_create-button" ng-click="closeDialog()" class="md-raised md-warn">{{
+                'button.modal.cancel' | translate }}
+            </md-button>
         </md-dialog-actions>
     </md-dialog-content>
 </md-dialog>

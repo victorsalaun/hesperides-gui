@@ -31,12 +31,13 @@
                         <md-input-container md-no-float class="md-block" flex="50">
                             <label><strong>{{ 'techno.modal.name' | translate }}</strong></label>
                             <input type="text" required ng-trim="true" ng-model="new_techno.name" md-autofocus="true"
-                                   id="technoName" placeholder="{{ 'techno.modal.name.placeholder' | translate }}" />
+                                   id="technoName" placeholder="{{ 'techno.modal.name.placeholder' | translate }}"/>
                         </md-input-container>
                         <md-input-container md-no-float class="md-block" flex="50">
                             <label><strong>{{ 'techno.modal.version' | translate }}</strong></label>
                             <input type="text" required ng-trim="true" ng-model="new_techno.version"
-                                   id="technoVersion" placeholder="{{ 'techno.modal.version.placeholder' | translate }}"/>
+                                   id="technoVersion"
+                                   placeholder="{{ 'techno.modal.version.placeholder' | translate }}"/>
                         </md-input-container>
                     </div>
                     <input type="submit" id="submit" value="Submit" ng-hide="true"/>
@@ -44,8 +45,14 @@
             </md-content>
         </div>
         <md-dialog-actions>
-            <md-button id="techno-menu-modal_create-button" ng-click="open_techno_page(new_techno.name, new_techno.version, true)" class="md-raised md-primary" ng-disabled="technoForm.$invalid">{{ 'button.modal.create' | translate }}</md-button>
-            <md-button id="techno-menu-modal_cancel-button" ng-click="closeDialog()" class="md-raised md-warn">{{ 'button.modal.cancel' | translate }}</md-button>
+            <md-button id="techno-menu-modal_create-button"
+                       ng-click="open_techno_page(new_techno.name, new_techno.version, true)"
+                       class="md-raised md-primary" ng-disabled="technoForm.$invalid">{{ 'button.modal.create' |
+                translate }}
+            </md-button>
+            <md-button id="techno-menu-modal_cancel-button" ng-click="closeDialog()" class="md-raised md-warn">{{
+                'button.modal.cancel' | translate }}
+            </md-button>
         </md-dialog-actions>
     </md-dialog-content>
 </md-dialog>
