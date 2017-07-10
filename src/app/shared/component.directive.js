@@ -1,49 +1,30 @@
-/*
- * This file is part of the Hesperides distribution.
- * (https://github.com/voyages-sncf-technologies/hesperides)
- * Copyright (c) 2016 VSCT.
- *
- * Hesperides is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, version 3.
- *
- * Hesperides is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
-var components = angular.module('hesperides.components', []);
+(function () {
+    'use strict';
 
-components.filter('filterPlatform', function () {
-    return function (items, filter) {
-        return _.filter(items, function(item) {
-            if(_.isUndefined(filter) || _.isEmpty(filter)) {
-                return item;
-            } else {
-                var regex_name = new RegExp(filter, 'i');
-                return regex_name.test(item.name) || regex_name.test(item.application_version) ? item : undefined;
+    angular
+        .module('hesperides.component')
+        .directive('listOfItems', ListOfItemsDirective)
+        .directive('listOfLinks', ListOfLinksDirective);
+
+    ListOfItemsDirective.$inject = ['$parse', 'PlatformColorService'];
+
+    /* @ngInject */
+    function ListOfItemsDirective($parse, PlatformColorService) {
+        var directive = {
+            templateUrl: 'shared/list-of-items.html',
+            link: link,
+            restrict: 'E',
+            scope: {
+                items: '=',
+                selectedItem: '=',
+                selectable: '=',
+                editable: '=',
+                filter: '='
             }
-        });
-    };
-});
+        };
+        return directive;
 
-components.directive('listOfItems', ['$parse', 'PlatformColorService', function ($parse, PlatformColorService) {
-
-    return {
-        restrict: 'E',
-        scope: {
-            items: '=',
-            selectedItem: '=',
-            selectable: '=',
-            editable: '=',
-            filter: '='
-        },
-        templateUrl: 'shared/list-of-items.html',
-        link: function (scope, element, attrs) {
-
+        function link(scope, element, attrs) {
             scope.typeahead = attrs.typeaheadexpression;
             if (!_.isUndefined(scope.typeahead)) {
                 scope.type = 'search';
@@ -52,7 +33,7 @@ components.directive('listOfItems', ['$parse', 'PlatformColorService', function 
             scope.input = {};
             scope.tooltip = attrs.tooltip;
 
-            scope.cssClass = function(item) {
+            scope.cssClass = function (item) {
                 var listClass = "";
 
                 if (item === scope.selectedItem) {
@@ -61,16 +42,16 @@ components.directive('listOfItems', ['$parse', 'PlatformColorService', function 
                     listClass += " md-clear";
                 }
 
-                if (scope.selectable == true) {
+                if (scope.selectable === true) {
                     listClass += " md-raised";
                 }
 
                 return listClass;
-            }
+            };
 
-            scope.backgroundColor = function(item) {
+            scope.backgroundColor = function (item) {
                 return PlatformColorService.calculateColor(item.name);
-            }
+            };
 
             scope.selfLabel = function (item) {
                 return $parse(attrs.label)(scope.$parent, {$item: item});
@@ -81,7 +62,7 @@ components.directive('listOfItems', ['$parse', 'PlatformColorService', function 
             };
 
             scope.selfEdit = function (item) {
-                if(scope.selectable){
+                if (scope.selectable) {
                     $parse(attrs.onedit)(scope.$parent, {$item: item});
                     scope.selectedItem = item;
                 }
@@ -102,32 +83,36 @@ components.directive('listOfItems', ['$parse', 'PlatformColorService', function 
             scope.resetAndHideInput = function () {
                 scope.show_input = false;
                 scope.input.inputText = '';
-            }
+            };
 
             scope.showInput = function () {
                 scope.show_input = true;
                 window.setTimeout(function () {
                     $('#nameInput').focus();
                 }, 80);
-            }
-
+            };
         }
-    };
+    }
 
-}]);
+    ////////////////
 
-components.directive('listOfLinks', ['$parse', 'PlatformColorService', '$window', function ($parse, PlatformColorService, $window) {
+    ListOfLinksDirective.$inject = ['$parse', 'PlatformColorService', '$window'];
 
-    return {
-        restrict: 'E',
-        scope: {
-            items: '=',
-            selectedItem: '=',
-            filter: '='
-        },
-        templateUrl: 'shared/list-of-links.html',
-        link: function (scope, element, attrs) {
+    /* @ngInject */
+    function ListOfLinksDirective($parse, PlatformColorService, $window) {
+        var directive = {
+            templateUrl: 'shared/list-of-links.html',
+            link: link,
+            restrict: 'E',
+            scope: {
+                items: '=',
+                selectedItem: '=',
+                filter: '='
+            }
+        };
+        return directive;
 
+        function link(scope, element, attrs) {
             scope.typeahead = attrs.typeaheadexpression;
             if (!_.isUndefined(scope.typeahead)) {
                 scope.type = 'search';
@@ -136,7 +121,7 @@ components.directive('listOfLinks', ['$parse', 'PlatformColorService', '$window'
             scope.input = {};
             scope.tooltip = attrs.tooltip;
 
-            scope.cssClass = function(item) {
+            scope.cssClass = function (item) {
                 var listClass = "";
 
                 if (item === scope.selectedItem) {
@@ -145,16 +130,16 @@ components.directive('listOfLinks', ['$parse', 'PlatformColorService', '$window'
                     listClass += " md-clear";
                 }
 
-                if (scope.selectable == true) {
+                if (scope.selectable === true) {
                     listClass += " md-raised";
                 }
 
                 return listClass;
-            }
+            };
 
-            scope.backgroundColor = function(item) {
+            scope.backgroundColor = function (item) {
                 return PlatformColorService.calculateColor(item.name);
-            }
+            };
 
             scope.selfLabel = function (item) {
                 return $parse(attrs.label)(scope.$parent, {$item: item});
@@ -166,7 +151,9 @@ components.directive('listOfLinks', ['$parse', 'PlatformColorService', '$window'
 
             scope.openLink = function (item) {
                 $window.open('/#' + $parse(attrs.href)(scope.$parent, {$item: item}), '_blank');
-            }
+            };
         }
-    };
-}]);
+    }
+
+})();
+
