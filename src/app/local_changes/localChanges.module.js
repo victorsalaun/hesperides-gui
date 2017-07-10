@@ -15,26 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+(function () {
+    'use strict';
 
-var localChangesModule = angular.module('hesperides.localChanges');
+    angular
+        .module('hesperides.localChanges', []);
 
-localChangesModule.factory('LocalChange', [function() {
-
-    var LocalChange = function (data){
-        var me = this;
-
-        // Attributes
-        this.properties_name = data.properties_name;
-        this.properties_value = data.properties_value == undefined ? "" : data.properties_value;
-        this.version_id = data.version_id == undefined ? store.get('current_platform_versionID') : data.version_id;
-
-        // Methods
-        this.prettify = function () {
-            return me.properties_name;
-        };
-
-    };
-
-    return LocalChange;
-
-}]);
+})();
