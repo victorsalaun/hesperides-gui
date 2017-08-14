@@ -1,19 +1,35 @@
 language: node_js
+
 node_js:
   - 4.2.4
 
 addons:
-  firefox: "50.0"
+  firefox: '50.0'
+
+services:
+  - docker
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::1}
+    - secure: s+Ary/bzr50U3oPWEcOL2SGofzQHVPcoSFo7pZLw57TzbumqPMAmdGnEuWYKARVFdYmwMDvW+i+IM7DPULD/sw3VLbb6a7EoK6xNd3TZ18x3zEzWCdBQhCsYEWi0hJupfRlYw44J2o88kN96sX0isUUn7zia/iJyvSaqeHGuXvD93IkSxe50HSBupwXL7wRysPWbmCMYafCwtwQ+rIsZleAw/LOl/lNuGGqW6P9rKh6ihgIjhtZpKAKpuVl4LicW3nefcNTTQnqWkPYD8z1yzWELArIvKG4mOPKWSkbHkmPvW5PMUxUfq6+LP0ZRfaeeXsAWGfh1GW730xpYEbxH8ttrJS2X13T2R9sHGYpXNK+FMXWHMQX2dlUkITuWBdEz2y9bkXd2fn0ipFPablXYF+oMqe6WOL2TlWQNcBtU8HonYJbtXUIZF1DcEqZTznm+UTyA+4IULRoHEUJZC7X1yXzcOKhXdEQGViuRdoM9NDa8lwRXTu4kPaTZwdNigZBW2GgQjEehMTdDizJwI+uxM1TLVRs30eTwEAUp6FX9EDSR45eH3IGFzWTo0Dj0IbfOK5wGb54H4SlLWs7dUiC/rYaYTWAMdeyW6qq5K7vk2xu/XUCw+KA3so9D6KHdwwr/XUW1r3RR3OH0v7jnTq7SDvQM0G1fFFv//kQ3G3IKjNY=
+    - secure: EfTP55u2lqOhH1ALyrZiubhmn1JFqwXHoXzSrwONbXC+LOyMGKcqSHoaMdUm3BZE60HxfbOTduJS7QRrSRn7KkzJX8Jvxnv4f8VB+wU2Vz7LoFZ331e+zI6DVJfz+XQjFFE3/kxc1GALtjLocswQf9Q1WS4o58YU0YF23BFrGBr0FbhUmgKk/9PAtYIsspGfeZ+nVKaWXGtkUy3TnRFw7TlfxfjpGsWAyi1noavUyubXHfDozPFYFvIuf0I5OnHVUXU1THzqUVvU/FKcpmle2mam9K2hbCwc31xKfURCTGa7wEGOxbO+RucoRMSLCjlYLlr9mGCR2CPChn2RfvY5wlbnyLbON1TG82Jhpvq0PMaultoGtTIpt2rNOjrOA5yXZ0fSHen2+AMYaYLT3Qk5bHSPmvzPB238IMIp5/bsA32bFhqxq4XfulMyzAVDXsm/zyuA+1DyUCzMFaRhzOmZ3Jq3xHKbFyDhHRZgovGv8YGYubg9JW2aVtvJP1nxBwZTkQysBhb8axFel+IBmxtzQOvjPQwNnYxJV0jCeVjurva1HL68mGhiVd0E7cPRHj6IuiFQixVzt7/dYevAx5vPWAMQMajiH2dkPfgDvYVE1jccCNY2sC7UCYX9v+iEFt9GuygKKgu36yGS0MpJZC5PbiIagVBOsDNYAFih8/FcIVo=
+    - secure: UCAZv3Kr5Hc5Lp75IKgt3Cm3KfXWo1+bcm9uA7/Y3SMD4kIct0btYBtTfbdTLsVREA3YJ6qNl2QSs5ifToi8yeHYSOBhghino+XlAKikULkJiLDNmLnn9aEMisZCgYKeYOoMwY2LYb9hUWjDfMZ/TANEeHudxapCFIs8Y67Aan73YB7OoSmd9YdNCXJdYJ20lWIcUtFrC16f376wK+HQbfCBrMC9CECkyL5H4TWi+YHXjIJRoxkfUws5a13JGmxaPmwyx65Q0rGf3nW8+pFZs6bZsdoWpdQ2Y0/RZTCVJ9DAM1QkHHwzpsu5K+iLs+VjCdffngEn08cOXcNW9hRnU5iVycQwZ9GHCIlto6bWuQ9C5E4Tljm3H6ZVat5JoOINcyy+GCcgX1aZh1I49I8hJsso7+anV57gn+RhXY3x/IIkpkyIqKfJjJGFGc805eDFU9Hx5NI79Mqx1nbJC4euvmCO/AI4YFP/X98WVqTKEYTIeJSY1OhR5PQe8c2zMe+ZFk3L4ntDy8flMSk+dp2wY3ilUQYDj5ZZpIuXzgxzcVCupFq2rGbZMuka6Hr9FCkyVyEnmKOjBZRMT2SrUoa5qmIsrBDe1xrH+jO3150JzEYVjv7k6sOqPnHBHAxxSwfSo73fcHrgKTS7GOJrdQnYLvNucc5/V/lIlLX0JkL+0Xk=
 
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - npm install -g bower karma grunt-cli jshint
   - npm start > /dev/null &
-  #- node node_modules/protractor/bin/webdriver-manager update
-  #- java -jar node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-*.jar -Dwebdriver.chrome.driver=./protractor/node_modules/webdriver-manager/selenium/chromedriver_2.25 &
-  - sleep 3 # give server time to start
+  - sleep 3
 
 script:
   - node_modules/.bin/karma start karma.conf.js --no-auto-watch --single-run
-  #- node_modules/.bin/protractor test/protractor-conf.js --browser=firefox
+
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+  - export CONFIG=victorsalaun/hesperides-gui
+  - docker build -t $CONFIG:$COMMIT .
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
+  - docker push $CONFIG
