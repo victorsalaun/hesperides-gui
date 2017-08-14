@@ -1,6 +1,8 @@
 Hesperides-gui
 ========
 
+[![Build Status](https://travis-ci.org/victorsalaun/hesperides-gui.svg?branch=master)](https://travis-ci.org/victorsalaun/hesperides-gui)
+
 Hesperides is an open source tool with a frontend (hesperides-gui) and a backend (hesperides).
 
 It lets you easily generate content from a template file (using mustache) in a given environment.
